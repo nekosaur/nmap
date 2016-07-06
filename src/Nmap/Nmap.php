@@ -35,6 +35,8 @@ class Nmap
 
     private $treatHostsAsOnline = false;
 
+    private $enablePingScan = false;
+
     private $executable;
 
     /**
@@ -91,6 +93,8 @@ class Nmap
 
         if (true === $this->disablePortScan) {
             $options[] = '-sn';
+        } elseif (true == $this->enablePingScan) {
+            $options[] = '-sP';
         } elseif (!empty($ports)) {
             $options[] = '-p '.implode(',', $ports);
         }
@@ -152,6 +156,18 @@ class Nmap
     public function enableVerbose($enable = true)
     {
         $this->enableVerbose = $enable;
+
+        return $this;
+    }
+
+    /**
+     * @param boolean $enable
+     *
+     * @return Nmap
+     */
+    public function enablePingScan($enable = true)
+    {
+        $this->enablePingScan = $enable;
 
         return $this;
     }

@@ -107,7 +107,7 @@ class Nmap
             $options[] = '-Pn';
         }
 
-        $options[] = '-oX';
+        $options[] = '-T4 -oX';
         $command   = sprintf('%s %s %s %s',
             $this->executable,
             implode(' ', $options),
